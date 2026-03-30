@@ -3,21 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Clicker Game</title>
+  <title>Cookie-Style Image Clicker</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <main class="game-layout">
     <section class="play-panel">
       <header>
-        <h1>Image Clicker Game</h1>
+        <h1>Cookie-Style Image Clicker</h1>
         <p class="score-label">Points: <span id="points">0</span></p>
         <p class="score-label">Per Click: <span id="per-click">1</span> · Auto / Sec: <span id="auto-rate">0</span></p>
+        <p class="score-label">Manual Multiplier: <span id="manual-mult">1x</span> · Auto Multiplier: <span id="auto-mult">1x</span></p>
       </header>
 
       <section class="click-area">
         <button id="click-target" class="image-button" aria-label="Click to earn points">
-          <img id="center-image" src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80" alt="Main click target" />
+          <img id="center-image" src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=500&q=80" alt="Main click target" />
         </button>
       </section>
     </section>
@@ -34,8 +35,20 @@
       </div>
 
       <div class="upgrade-column">
-        <h2>Image Upgrades</h2>
-        <div id="image-upgrades"></div>
+        <h2>One-Time Multipliers</h2>
+        <div id="multiplier-upgrades"></div>
+      </div>
+
+      <div class="upgrade-column">
+        <h2>Image Shop</h2>
+        <p class="small">Buy new clicker skins. Each one costs more than the last.</p>
+        <div id="image-shop"></div>
+      </div>
+
+      <div class="upgrade-column">
+        <h2>Owned Images</h2>
+        <p class="small">Swap anytime after purchase.</p>
+        <div id="owned-images"></div>
       </div>
     </aside>
   </main>
