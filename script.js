@@ -36,6 +36,34 @@ const multiplierUpgrades = [
   { id: 'x4', icon: '🧠', name: 'Overclock Core', target: 'auto', cost: 550, mult: 2, purchased: false },
   { id: 'x5', icon: '📈', name: 'AI Foreman', target: 'auto', cost: 3000, mult: 3, purchased: false },
   { id: 'x6', icon: '🕳️', name: 'Singularity Reactor', target: 'auto', cost: 15500, mult: 5, purchased: false },
+  { id: 'm1', name: 'Soft Tap', cost: 8, add: 1, purchased: 0 },
+  { id: 'm2', name: 'Steel Finger', cost: 24, add: 2, purchased: 0 },
+  { id: 'm3', name: 'Double Palm', cost: 55, add: 4, purchased: 0 },
+  { id: 'm4', name: 'Turbo Wrist', cost: 120, add: 7, purchased: 0 },
+  { id: 'm5', name: 'Magma Knuckle', cost: 300, add: 15, purchased: 0 },
+  { id: 'm6', name: 'Titan Press', cost: 700, add: 32, purchased: 0 },
+  { id: 'm7', name: 'Star Punch', cost: 1600, add: 70, purchased: 0 },
+  { id: 'm8', name: 'Infinity Tap', cost: 3600, add: 150, purchased: 0 },
+];
+
+const autoUpgrades = [
+  { id: 'a1', name: 'Crumb Bot', cost: 15, add: 1, purchased: 0 },
+  { id: 'a2', name: 'Baker Drone', cost: 45, add: 2, purchased: 0 },
+  { id: 'a3', name: 'Conveyor Arm', cost: 110, add: 5, purchased: 0 },
+  { id: 'a4', name: 'Cookie Lab', cost: 280, add: 11, purchased: 0 },
+  { id: 'a5', name: 'Robotic Oven', cost: 680, add: 24, purchased: 0 },
+  { id: 'a6', name: 'Factory Floor', cost: 1500, add: 52, purchased: 0 },
+  { id: 'a7', name: 'Moon Mine', cost: 3200, add: 110, purchased: 0 },
+  { id: 'a8', name: 'Galaxy Foundry', cost: 7000, add: 240, purchased: 0 },
+];
+
+const multiplierUpgrades = [
+  { id: 'x1', name: 'Heavy Cursor', target: 'manual', cost: 400, mult: 2, purchased: false },
+  { id: 'x2', name: 'Golden Gloves', target: 'manual', cost: 2200, mult: 3, purchased: false },
+  { id: 'x3', name: 'Quantum Tap', target: 'manual', cost: 12000, mult: 5, purchased: false },
+  { id: 'x4', name: 'Overclock Core', target: 'auto', cost: 550, mult: 2, purchased: false },
+  { id: 'x5', name: 'AI Foreman', target: 'auto', cost: 3000, mult: 3, purchased: false },
+  { id: 'x6', name: 'Singularity Reactor', target: 'auto', cost: 15500, mult: 5, purchased: false },
 ];
 
 const imageCatalog = [
@@ -144,6 +172,7 @@ function createUpgradeCard({
   buttonLabel = 'Buy',
   selected = false,
 }) {
+function createUpgradeCard({ title, detail, costLabel, onClick, disabled, buttonLabel = 'Buy', selected = false }) {
   const wrapper = document.createElement('div');
   wrapper.className = 'upgrade-item';
 
@@ -278,6 +307,36 @@ function renderOwnedImages() {
     const card = createUpgradeCard({
       title: image.name,
       icon: image.icon,
+      detail: 'Swap to this image at any time.',
+      costLabel: '',
+      buttonLabel: 'Use',
+      selected: image.id === state.selectedImageId,
+      disabled: false,
+      onClick: () => {
+        state.selectedImageId = image.id;
+        render();
+      },
+    });
+        render();
+      },
+    });
+    imageShopRoot.appendChild(card);
+  });
+
+  if (!imageShopRoot.children.length) {
+    const complete = document.createElement('p');
+    complete.className = 'small';
+    complete.textContent = 'All images unlocked. Nice grind!';
+    imageShopRoot.appendChild(complete);
+  }
+}
+
+function renderOwnedImages() {
+  ownedImagesRoot.innerHTML = '';
+  imageCatalog.forEach((image) => {
+    if (!image.purchased) return;
+    const card = createUpgradeCard({
+      title: image.name,
       detail: 'Swap to this image at any time.',
       costLabel: '',
       buttonLabel: 'Use',
