@@ -98,6 +98,23 @@ h2 {
   padding: 0.75rem;
 }
 
+.upgrade-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.upgrade-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #1d2647;
+  border: 1px solid #354173;
+  font-size: 0.95rem;
+}
+
 .upgrade-item button {
   border: 0;
   border-radius: 8px;

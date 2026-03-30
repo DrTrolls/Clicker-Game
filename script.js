@@ -8,6 +8,34 @@ const state = {
 };
 
 const manualUpgrades = [
+  { id: 'm1', icon: '👆', name: 'Soft Tap', cost: 8, add: 1, purchased: 0 },
+  { id: 'm2', icon: '✋', name: 'Steel Finger', cost: 24, add: 2, purchased: 0 },
+  { id: 'm3', icon: '🤚', name: 'Double Palm', cost: 55, add: 4, purchased: 0 },
+  { id: 'm4', icon: '⚡', name: 'Turbo Wrist', cost: 120, add: 7, purchased: 0 },
+  { id: 'm5', icon: '🔥', name: 'Magma Knuckle', cost: 300, add: 15, purchased: 0 },
+  { id: 'm6', icon: '🦾', name: 'Titan Press', cost: 700, add: 32, purchased: 0 },
+  { id: 'm7', icon: '🌟', name: 'Star Punch', cost: 1600, add: 70, purchased: 0 },
+  { id: 'm8', icon: '♾️', name: 'Infinity Tap', cost: 3600, add: 150, purchased: 0 },
+];
+
+const autoUpgrades = [
+  { id: 'a1', icon: '🤖', name: 'Crumb Bot', cost: 15, add: 1, purchased: 0 },
+  { id: 'a2', icon: '🛸', name: 'Baker Drone', cost: 45, add: 2, purchased: 0 },
+  { id: 'a3', icon: '🦾', name: 'Conveyor Arm', cost: 110, add: 5, purchased: 0 },
+  { id: 'a4', icon: '🏭', name: 'Cookie Lab', cost: 280, add: 11, purchased: 0 },
+  { id: 'a5', icon: '🍪', name: 'Robotic Oven', cost: 680, add: 24, purchased: 0 },
+  { id: 'a6', icon: '🏗️', name: 'Factory Floor', cost: 1500, add: 52, purchased: 0 },
+  { id: 'a7', icon: '🌙', name: 'Moon Mine', cost: 3200, add: 110, purchased: 0 },
+  { id: 'a8', icon: '🌌', name: 'Galaxy Foundry', cost: 7000, add: 240, purchased: 0 },
+];
+
+const multiplierUpgrades = [
+  { id: 'x1', icon: '🖱️', name: 'Heavy Cursor', target: 'manual', cost: 400, mult: 2, purchased: false },
+  { id: 'x2', icon: '🥇', name: 'Golden Gloves', target: 'manual', cost: 2200, mult: 3, purchased: false },
+  { id: 'x3', icon: '⚛️', name: 'Quantum Tap', target: 'manual', cost: 12000, mult: 5, purchased: false },
+  { id: 'x4', icon: '🧠', name: 'Overclock Core', target: 'auto', cost: 550, mult: 2, purchased: false },
+  { id: 'x5', icon: '📈', name: 'AI Foreman', target: 'auto', cost: 3000, mult: 3, purchased: false },
+  { id: 'x6', icon: '🕳️', name: 'Singularity Reactor', target: 'auto', cost: 15500, mult: 5, purchased: false },
   { id: 'm1', name: 'Soft Tap', cost: 8, add: 1, purchased: 0 },
   { id: 'm2', name: 'Steel Finger', cost: 24, add: 2, purchased: 0 },
   { id: 'm3', name: 'Double Palm', cost: 55, add: 4, purchased: 0 },
@@ -41,6 +69,7 @@ const multiplierUpgrades = [
 const imageCatalog = [
   {
     id: 'i0',
+    icon: '🌇',
     name: 'Sunset Orb',
     cost: 0,
     purchased: true,
@@ -48,6 +77,7 @@ const imageCatalog = [
   },
   {
     id: 'i1',
+    icon: '🪐',
     name: 'Neon Planet',
     cost: 80,
     purchased: false,
@@ -55,6 +85,7 @@ const imageCatalog = [
   },
   {
     id: 'i2',
+    icon: '💎',
     name: 'Crystal Bloom',
     cost: 260,
     purchased: false,
@@ -62,6 +93,7 @@ const imageCatalog = [
   },
   {
     id: 'i3',
+    icon: '🍩',
     name: 'Cyber Donut',
     cost: 780,
     purchased: false,
@@ -69,6 +101,7 @@ const imageCatalog = [
   },
   {
     id: 'i4',
+    icon: '🌈',
     name: 'Candy Nebula',
     cost: 2100,
     purchased: false,
@@ -76,6 +109,7 @@ const imageCatalog = [
   },
   {
     id: 'i5',
+    icon: '👑',
     name: 'Sugar Crown',
     cost: 5600,
     purchased: false,
@@ -83,6 +117,7 @@ const imageCatalog = [
   },
   {
     id: 'i6',
+    icon: '❄️',
     name: 'Frozen Star',
     cost: 14500,
     purchased: false,
@@ -127,12 +162,30 @@ function inflation(baseCost, purchased) {
   return Math.floor(baseCost * Math.pow(1.33, purchased));
 }
 
+function createUpgradeCard({
+  icon = '⭐',
+  title,
+  detail,
+  costLabel,
+  onClick,
+  disabled,
+  buttonLabel = 'Buy',
+  selected = false,
+}) {
 function createUpgradeCard({ title, detail, costLabel, onClick, disabled, buttonLabel = 'Buy', selected = false }) {
   const wrapper = document.createElement('div');
   wrapper.className = 'upgrade-item';
 
+  const heading = document.createElement('div');
+  heading.className = 'upgrade-heading';
+
+  const iconEl = document.createElement('span');
+  iconEl.className = 'upgrade-icon';
+  iconEl.textContent = icon;
+
   const name = document.createElement('strong');
   name.textContent = title;
+  heading.append(iconEl, name);
 
   const info = document.createElement('div');
   info.className = 'small';
@@ -144,7 +197,7 @@ function createUpgradeCard({ title, detail, costLabel, onClick, disabled, button
   if (selected) button.classList.add('selected');
   button.addEventListener('click', onClick);
 
-  wrapper.append(name, info, button);
+  wrapper.append(heading, info, button);
   return wrapper;
 }
 
@@ -154,6 +207,7 @@ function renderManual() {
     const cost = inflation(upgrade.cost, upgrade.purchased);
     const card = createUpgradeCard({
       title: upgrade.name,
+      icon: upgrade.icon,
       detail: `+${upgrade.add} base click power · Owned ${upgrade.purchased}`,
       costLabel: cost,
       disabled: !canAfford(cost),
@@ -175,6 +229,7 @@ function renderAuto() {
     const cost = inflation(upgrade.cost, upgrade.purchased);
     const card = createUpgradeCard({
       title: upgrade.name,
+      icon: upgrade.icon,
       detail: `+${upgrade.add} base auto / sec · Owned ${upgrade.purchased}`,
       costLabel: cost,
       disabled: !canAfford(cost),
@@ -196,6 +251,7 @@ function renderMultipliers() {
     const targetName = upgrade.target === 'manual' ? 'manual click power' : 'auto production';
     const card = createUpgradeCard({
       title: upgrade.name,
+      icon: upgrade.icon,
       detail: `One-time: x${upgrade.mult} ${targetName}`,
       costLabel: upgrade.purchased ? 'Owned' : upgrade.cost,
       disabled: upgrade.purchased || !canAfford(upgrade.cost),
@@ -221,6 +277,7 @@ function renderImageShop() {
     if (image.purchased) return;
     const card = createUpgradeCard({
       title: image.name,
+      icon: image.icon,
       detail: 'Unlock this skin for your click target.',
       costLabel: image.cost,
       disabled: !canAfford(image.cost),
@@ -229,6 +286,37 @@ function renderImageShop() {
         spend(image.cost);
         image.purchased = true;
         state.selectedImageId = image.id;
+        render();
+      },
+    });
+    imageShopRoot.appendChild(card);
+  });
+
+  if (!imageShopRoot.children.length) {
+    const complete = document.createElement('p');
+    complete.className = 'small';
+    complete.textContent = 'All images unlocked. Nice grind!';
+    imageShopRoot.appendChild(complete);
+  }
+}
+
+function renderOwnedImages() {
+  ownedImagesRoot.innerHTML = '';
+  imageCatalog.forEach((image) => {
+    if (!image.purchased) return;
+    const card = createUpgradeCard({
+      title: image.name,
+      icon: image.icon,
+      detail: 'Swap to this image at any time.',
+      costLabel: '',
+      buttonLabel: 'Use',
+      selected: image.id === state.selectedImageId,
+      disabled: false,
+      onClick: () => {
+        state.selectedImageId = image.id;
+        render();
+      },
+    });
         render();
       },
     });
