@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Clicker Game</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="game">
+    <header>
+      <h1>Image Clicker Game</h1>
+      <p class="score-label">Points: <span id="points">0</span></p>
+      <p class="score-label">Per Click: <span id="per-click">1</span> · Auto / Sec: <span id="auto-rate">0</span></p>
+    </header>
+
+    <section class="click-area">
+      <button id="click-target" class="image-button" aria-label="Click to earn points">
+        <img id="center-image" src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80" alt="Main click target" />
+      </button>
+    </section>
+
+    <section class="upgrades">
+      <div class="upgrade-column">
+        <h2>Manual Click Upgrades</h2>
+        <div id="manual-upgrades"></div>
+      </div>
+
+      <div class="upgrade-column">
+        <h2>Automatic Click Upgrades</h2>
+        <div id="auto-upgrades"></div>
+      </div>
+
+      <div class="upgrade-column">
+        <h2>Image Upgrades</h2>
+        <div id="image-upgrades"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
