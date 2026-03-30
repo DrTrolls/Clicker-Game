@@ -7,20 +7,22 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="game">
-    <header>
-      <h1>Image Clicker Game</h1>
-      <p class="score-label">Points: <span id="points">0</span></p>
-      <p class="score-label">Per Click: <span id="per-click">1</span> · Auto / Sec: <span id="auto-rate">0</span></p>
-    </header>
+  <main class="game-layout">
+    <section class="play-panel">
+      <header>
+        <h1>Image Clicker Game</h1>
+        <p class="score-label">Points: <span id="points">0</span></p>
+        <p class="score-label">Per Click: <span id="per-click">1</span> · Auto / Sec: <span id="auto-rate">0</span></p>
+      </header>
 
-    <section class="click-area">
-      <button id="click-target" class="image-button" aria-label="Click to earn points">
-        <img id="center-image" src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80" alt="Main click target" />
-      </button>
+      <section class="click-area">
+        <button id="click-target" class="image-button" aria-label="Click to earn points">
+          <img id="center-image" src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80" alt="Main click target" />
+        </button>
+      </section>
     </section>
 
-    <section class="upgrades">
+    <aside class="upgrades-panel">
       <div class="upgrade-column">
         <h2>Manual Click Upgrades</h2>
         <div id="manual-upgrades"></div>
@@ -35,7 +37,7 @@
         <h2>Image Upgrades</h2>
         <div id="image-upgrades"></div>
       </div>
-    </section>
+    </aside>
   </main>
 
   <script src="script.js"></script>

@@ -20,10 +20,16 @@ body {
   color: var(--text);
 }
 
-.game {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 1.5rem;
+.game-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+}
+
+.play-panel {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding: 1.75rem;
 }
 
 h1,
@@ -39,7 +45,6 @@ h2 {
 .click-area {
   display: grid;
   place-items: center;
-  margin: 1.5rem 0;
 }
 
 .image-button {
@@ -55,7 +60,7 @@ h2 {
 }
 
 .image-button img {
-  width: min(60vw, 280px);
+  width: min(56vw, 320px);
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 999px;
@@ -63,23 +68,26 @@ h2 {
   box-shadow: 0 12px 30px rgb(0 0 0 / 30%);
 }
 
-.upgrades {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+.upgrades-panel {
+  border-left: 1px solid #2e3661;
+  background: color-mix(in srgb, var(--card), black 12%);
+  padding: 1rem;
+  overflow-y: auto;
 }
 
 .upgrade-column {
-  background: color-mix(in srgb, var(--card), black 8%);
   border-radius: 14px;
-  padding: 1rem;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+  background: #13192e;
+  border: 1px solid #31395f;
 }
 
 .upgrade-item {
   display: grid;
   gap: 0.45rem;
   margin-bottom: 0.8rem;
-  background: #12172a;
+  background: #0f1426;
   border: 1px solid #2f375f;
   border-radius: 10px;
   padding: 0.75rem;
@@ -105,8 +113,13 @@ h2 {
   font-size: 0.9rem;
 }
 
-@media (max-width: 850px) {
-  .upgrades {
+@media (max-width: 960px) {
+  .game-layout {
     grid-template-columns: 1fr;
+  }
+
+  .upgrades-panel {
+    border-left: 0;
+    border-top: 1px solid #2e3661;
   }
 }
