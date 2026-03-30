@@ -15,12 +15,18 @@
 
 body {
   margin: 0;
+  height: 100vh;
+  overflow: hidden;
   min-height: 100vh;
   background: radial-gradient(circle at top, #202a4d, var(--bg));
   color: var(--text);
 }
 
 .game-layout {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  overflow: hidden;
   min-height: 100vh;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 380px;
@@ -30,6 +36,7 @@ body {
   display: grid;
   grid-template-rows: auto 1fr;
   padding: 1.75rem;
+  overflow: hidden;
 }
 
 h1,
@@ -69,6 +76,7 @@ h2 {
 }
 
 .upgrades-panel {
+  height: 100vh;
   border-left: 1px solid #2e3661;
   background: color-mix(in srgb, var(--card), black 12%);
   padding: 1rem;
