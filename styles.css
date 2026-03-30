@@ -1,0 +1,125 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --bg: #101321;
+  --card: #1a1f33;
+  --accent: #7c8bff;
+  --accent-2: #4ce0c0;
+  --text: #e7ebff;
+  --muted: #a3accf;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #202a4d, var(--bg));
+  color: var(--text);
+}
+
+.game-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+}
+
+.play-panel {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding: 1.75rem;
+}
+
+h1,
+h2 {
+  margin: 0 0 0.75rem;
+}
+
+.score-label {
+  margin: 0.25rem 0;
+  color: var(--muted);
+}
+
+.click-area {
+  display: grid;
+  place-items: center;
+}
+
+.image-button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.08s ease;
+}
+
+.image-button:active {
+  transform: scale(0.95);
+}
+
+.image-button img {
+  width: min(56vw, 320px);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 999px;
+  border: 6px solid var(--accent);
+  box-shadow: 0 12px 30px rgb(0 0 0 / 30%);
+}
+
+.upgrades-panel {
+  border-left: 1px solid #2e3661;
+  background: color-mix(in srgb, var(--card), black 12%);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.upgrade-column {
+  border-radius: 14px;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+  background: #13192e;
+  border: 1px solid #31395f;
+}
+
+.upgrade-item {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 0.8rem;
+  background: #0f1426;
+  border: 1px solid #2f375f;
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+.upgrade-item button {
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(130deg, var(--accent), var(--accent-2));
+  color: #0c1022;
+  font-weight: 700;
+  padding: 0.45rem;
+  cursor: pointer;
+}
+
+.upgrade-item button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.small {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 960px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .upgrades-panel {
+    border-left: 0;
+    border-top: 1px solid #2e3661;
+  }
+}
