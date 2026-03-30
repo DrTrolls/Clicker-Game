@@ -25,11 +25,8 @@ body {
 .game-layout {
   height: 100vh;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 380px;
+  grid-template-columns: minmax(0, 1fr) 430px;
   overflow: hidden;
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 380px;
 }
 
 .play-panel {
@@ -67,7 +64,7 @@ h2 {
 }
 
 .image-button img {
-  width: min(56vw, 320px);
+  width: min(56vw, 340px);
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 999px;
@@ -101,6 +98,23 @@ h2 {
   padding: 0.75rem;
 }
 
+.upgrade-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.upgrade-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #1d2647;
+  border: 1px solid #354173;
+  font-size: 0.95rem;
+}
+
 .upgrade-item button {
   border: 0;
   border-radius: 8px;
@@ -109,6 +123,10 @@ h2 {
   font-weight: 700;
   padding: 0.45rem;
   cursor: pointer;
+}
+
+.upgrade-item button.selected {
+  outline: 2px solid #fff;
 }
 
 .upgrade-item button:disabled {
@@ -122,11 +140,19 @@ h2 {
 }
 
 @media (max-width: 960px) {
+  body {
+    overflow-y: auto;
+    height: auto;
+  }
+
   .game-layout {
+    min-height: 100vh;
+    height: auto;
     grid-template-columns: 1fr;
   }
 
   .upgrades-panel {
+    height: auto;
     border-left: 0;
     border-top: 1px solid #2e3661;
   }
